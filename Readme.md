@@ -15,6 +15,18 @@ pip install -r requeriments.txt
 python server.py
 ```
 
+## Build Docker container
+
+```bash
+docker build -t cirici/wkhtmltopdf-aas .
+```
+
+## Starting Docker container
+
+```bash
+docker run -d -p --name wkhtmltopdf-aas <hostport>:5000 cirici/wkhtmltopdf-aas
+```
+
 ## Testing the microservice
 
 Testing providing url to render:
