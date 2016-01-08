@@ -30,6 +30,8 @@ Testing uploading contents:
 curl -F "content=@test.html" 'http://localhost:5000/pdf' > youramazingfile.pdf
 ```
 
+You want to generate images? No problem just change the ``pdf`` endpoint to ``jpg``
+
 ## Resources
 
-[https://pypi.python.org/pypi/pdfkit]
+https://pypi.python.org/pypi/pdfkit
