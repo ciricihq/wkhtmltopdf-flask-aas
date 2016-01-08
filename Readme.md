@@ -3,6 +3,18 @@
 This is a microservices that handles pdfkit wich uses wkhtmltopdf and makes it a microservice
 to make it easy the PDF generation.
 
+## Manual install
+
+```bash
+pip install -r requeriments.txt
+```
+
+## Starting server
+
+```bash
+python server.py
+```
+
 ## Testing the microservice
 
 Testing providing url to render:
