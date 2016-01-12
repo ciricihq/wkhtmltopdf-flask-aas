@@ -1,5 +1,6 @@
 from flask import Flask, Response, request
 from werkzeug import secure_filename
+from paste.translogger import TransLogger
 import pdfkit
 
 import cherrypy
@@ -48,31 +49,26 @@ def handle_request(config):
 
     return pdf
 
-if __name__ == "__main__":
-    # Mount the application
-    cherrypy.tree.graft(app, "/")
+def run_server():
+    # Enable WSGI access logging via Paste
+    app_logged = TransLogger(app)
 
-    # Unsubscribe the default server
-    cherrypy.server.unsubscribe()
+    # Mount the WSGI callable object (app) on the root directory
+    cherrypy.tree.graft(app_logged, '/')
 
-    # Instantiate a new server object
-    server = cherrypy._cpserver.Server()
+    # Set the configuration of the web server
+    cherrypy.config.update({
+        'engine.autoreload_on': True,
+        'log.screen': True,
+        'server.socket_port': 80,
+        'server.socket_host': '0.0.0.0'
+    })
 
-    # Configure the server object
-    server.socket_host = "0.0.0.0"
-    server.socket_port = 80
-    server.thread_pool = 30
-
-    # For SSL Support
-    # server.ssl_module            = 'pyopenssl'
-    # server.ssl_certificate       = 'ssl/certificate.crt'
-    # server.ssl_private_key       = 'ssl/private.key'
-    # server.ssl_certificate_chain = 'ssl/bundle.crt'
-
-    # Subscribe this server
-    server.subscribe()
-
-    # Start the server engine (Option 1 *and* 2)
-
+    # Start the CherryPy WSGI web server
     cherrypy.engine.start()
     cherrypy.engine.block()
+
+
+if __name__ == "__main__":
+    run_server()
+
