@@ -20,11 +20,11 @@ RUN ln -s /usr/local/bin/wkhtmltoimage /usr/bin/wkhtmltoimage
 
 WORKDIR /
 
-COPY server.py /server.py
+COPY app.py /app.py
 COPY requeriments.txt /requeriments.txt
 
 RUN pip install -r requeriments.txt
 
 EXPOSE 5000
 
-CMD ["python","server.py"]
+CMD ["python","app.py"]
