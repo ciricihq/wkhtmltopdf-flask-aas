@@ -25,6 +25,6 @@ COPY requeriments.txt /requeriments.txt
 
 RUN pip install -r requeriments.txt
 
-EXPOSE 5000
+EXPOSE 80
 
 CMD ["python","app.py"]
