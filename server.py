@@ -1,49 +1,38 @@
-from flask import Flask, Response, request
-from werkzeug import secure_filename
-import pdfkit
-app = Flask(__name__)
+# Import your application as:
+# from app import application
+# Example:
 
-tmpfolder = "/tmp/"
+from app import app
 
-@app.route("/pdf", methods=['POST'])
-def pdf():
-    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-    doc = handle_request(config)
-    return Response(doc, mimetype='application/pdf')
+# Import CherryPy
+import cherrypy
 
-@app.route("/jpg", methods=['POST'])
-def jpg():
-    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltoimage')
-    doc = handle_request(config)
-    return Response(doc, mimetype='image/jpg')
+if __name__ == '__main__':
 
+    # Mount the application
+    cherrypy.tree.graft(app, "/")
 
-def handle_request(config):
-    # We are getting the url to generate from a form parameter
-    options = {}
-    options = request.values.getlist('options', type=float)
-    print(options)
+    # Unsubscribe the default server
+    cherrypy.server.unsubscribe()
 
-    # Converting post options group to dictionary
-    listname = 'options'
-    options = dict()
-    for key, value in request.form.items():
-        if key[:len(listname)] == listname:
-            options[key[len(listname)+1:-1]] = value
+    # Instantiate a new server object
+    server = cherrypy._cpserver.Server()
 
-    if ('url' in request.form):
-        print("URL provided: " + request.form['url'])
-        pdf = pdfkit.from_url(str(request.form['url']), output_path=False, configuration=config, options=options)
+    # Configure the server object
+    server.socket_host = "0.0.0.0"
+    server.socket_port = 80
+    server.thread_pool = 30
 
-    # If we are receiving the html contents from a uploaded file
-    elif ('content' in request.files):
-        print("File provided: " + str(request.files['content']))
-        f = request.files['content']
-        f.save(tmpfolder + secure_filename(f.filename))
+    # For SSL Support
+    # server.ssl_module            = 'pyopenssl'
+    # server.ssl_certificate       = 'ssl/certificate.crt'
+    # server.ssl_private_key       = 'ssl/private.key'
+    # server.ssl_certificate_chain = 'ssl/bundle.crt'
 
-        pdf = pdfkit.from_file(tmpfolder + secure_filename(f.filename), output_path=False, configuration=config, options=options)
+    # Subscribe this server
+    server.subscribe()
 
-    return pdf
+    # Start the server engine (Option 1 *and* 2)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    cherrypy.engine.start()
+    cherrypy.engine.block()
