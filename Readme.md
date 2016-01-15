@@ -24,7 +24,7 @@ docker build -t cirici/wkhtmltopdf-aas .
 ## Starting Docker container
 
 ```bash
-docker run -d --name wkhtmltopdf-aas -p <hostport>:5000 cirici/wkhtmltopdf-aas
+docker run -d --name wkhtmltopdf-aas -p <hostport>:80 cirici/wkhtmltopdf-aas
 ```
 
 ## Testing the microservice
