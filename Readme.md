@@ -12,7 +12,7 @@ pip install -r requeriments.txt
 ## Starting server
 
 ```bash
-python server.py
+python app.py
 ```
 
 ## Build Docker container
