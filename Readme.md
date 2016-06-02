@@ -1,6 +1,7 @@
 PDF Generator Flask microservice
 ================================
 
+[![Travis][build svg]](travis)
 [![Docker Pulls][docker pulls svg]][docker hub]
 [![License][license svg]][license]
 
@@ -67,5 +68,7 @@ https://pypi.python.org/pypi/pdfkit
 
 [docker hub]: https://hub.docker.com/r/ciricihq/wkhtmltopdf-aas/
 [license]: https://github.com/ciricihq/wkhtmltopdf-flask-aas/blob/master/LICENSE.md
+[travis]: https://travis-ci.org/ciricihq/wkhtmltopdf-flask-aas
 [docker pulls svg]: https://img.shields.io/docker/pulls/ciricihq/wkhtmltopdf-aas.svg?style=flat-square
 [license svg]: https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square
+[build svg]: https://img.shields.io/travis/ciricihq/wkhtmltopdf-flask-aas.svg?style=flat-square
