@@ -1,31 +1,43 @@
-# PDF Generator Flask microservice
+PDF Generator Flask microservice
+================================
 
 This is a microservices that handles pdfkit wich uses wkhtmltopdf and makes it a microservice
 to make it easy the PDF generation.
 
-## Manual install
+Manual install
+--------------
 
 ```bash
 pip install -r requeriments.txt
 ```
 
-## Starting server
+### Starting server
 
 ```bash
 python app.py
 ```
 
-## Build Docker container
+### Build Docker container
 
 ```bash
-docker build -t cirici/wkhtmltopdf-aas .
+docker build -t ciricihq/wkhtmltopdf-aas .
 ```
 
-## Starting Docker container
+### Starting Docker container
 
 ```bash
-docker run -d --name wkhtmltopdf-aas -p <hostport>:80 cirici/wkhtmltopdf-aas
+docker run -d --name wkhtmltopdf-aas -p <hostport>:80 ciricihq/wkhtmltopdf-aas
 ```
+
+Docker hub installation
+-----------------------
+
+~~~bash
+docker run -d --name wkhtmltopdf-aas -p <hostport>:80 ciricihq/wkhtmltopdf-aas
+~~~
+
+Builds are automatically generated from github. So there's no need tu push the
+images again.
 
 ## Testing the microservice
 
