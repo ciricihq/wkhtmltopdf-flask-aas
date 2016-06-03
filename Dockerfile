@@ -2,7 +2,8 @@ FROM debian:jessie
 
 MAINTAINER Genar Trias <genar@cirici.com>
 
-RUN apt-get update && \
+RUN apt-get clean && \
+    apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
     gdebi \
