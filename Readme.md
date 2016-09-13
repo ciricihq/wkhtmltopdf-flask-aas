@@ -46,17 +46,24 @@ docker run -d --name wkhtmltopdf-aas -p <hostport>:80 ciricihq/wkhtmltopdf-aas
 Testing the microservice
 ------------------------
 
-Testing providing url to render:
+### Testing providing url to render:
 
 ```bash
 curl -F "url=http://cirici.com" 'http://localhost:5000/pdf' > youramazingfile.pdf
 ```
 
-
-Testing uploading contents:
+### Testing uploading contents:
 
 ```bash
 curl -F "content=@test.html" 'http://localhost:5000/pdf' > youramazingfile.pdf
+```
+
+### Passing options
+
+You can use all the wkhtmltopdf options passing in a options array as following example (if option should not receive value just send the option without value):
+
+```bash
+curl -F "url=http://cirici.com" -F "options[orientation]=Landscape" -F "options[grayscale]" 'http://localhost:5000/pdf' > youramazingfile.pdf
 ```
 
 You want to generate images? No problem, just change the `pdf` endpoint to `jpg`.
