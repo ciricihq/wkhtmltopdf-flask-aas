@@ -58,6 +58,12 @@ curl -F "url=http://cirici.com" 'http://localhost:5000/pdf' > youramazingfile.pd
 curl -F "content=@test.html" 'http://localhost:5000/pdf' > youramazingfile.pdf
 ```
 
+### Testing passing html as string:
+
+```bash
+curl -F "html=<html><head> <meta charset%3D"utf8"> </head><body>Hello world</body></html>" 'http://localhost:5000/pdf' > youramazingfile.pdf
+```
+
 ### Passing options
 
 You can use all the wkhtmltopdf options passing in a options array as following example (if option should not receive value just send the option without value):
