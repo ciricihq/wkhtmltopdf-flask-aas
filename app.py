@@ -41,7 +41,7 @@ def handle_request(config):
 
     if ('html' in request.form):
         print("Html provided")
-        pdf = pdfkit.from_string(str(request.form['html']), output_path=False, configuration=config, options=options)
+        pdf = pdfkit.from_string(unicode(request.form['html']), output_path=False, configuration=config, options=options)
 
     # If we are receiving the html contents from a uploaded file
     elif ('content' in request.files):
